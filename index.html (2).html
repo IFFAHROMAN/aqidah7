@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Interaktif: Aqidah Islam - MTs Kelas VII</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'islamic-green': '#009000',
+                        'harmony-1': '#52aa88',
+                        'harmony-2': '#56b181',
+                        'harmony-3': '#a3d0c0',
+                        'harmony-4': '#d4e6dc',
+                        'harmony-5': '#f7faf4',
+                        'cosmic-cobalt': '#303083',
+                        'light-khaki': '#DACBAE',
+                        'matte-goldenrod': '#AF934C'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                        arabic: ['"Amiri"', '"Lateef"', '"Scheherazade"', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Amiri:wght@400;700&display=swap');
+        
+        body {
+            background-color: #f7faf4; /* harmony-5 */
+            scroll-behavior: smooth;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom scrollbar for better UI */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #d4e6dc; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #52aa88; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #009000; 
+        }
+
+        /* Drag and Drop Styles */
+        .draggable {
+            cursor: grab;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .draggable:active {
+            cursor: grabbing;
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .dropzone {
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .dropzone.hover {
+            background-color: #d4e6dc; /* harmony-4 */
+            border-color: #52aa88;
+        }
+        
+        /* Quiz Styles */
+        .quiz-option {
+            transition: all 0.2s;
+        }
+        .quiz-option:hover {
+            transform: translateX(5px);
+        }
+        .correct-answer {
+            background-color: #d4e6dc !important; /* light green */
+            border-color: #52aa88 !important;
+            color: #009000;
+        }
+        .wrong-answer {
+            background-color: #fee2e2 !important; /* light red */
+            border-color: #ef4444 !important;
+            color: #b91c1c;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased font-sans flex flex-col min-h-screen">
+
+    <header class="bg-gradient-to-r from-islamic-green to-harmony-1 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold tracking-tight">Aqidah Islam</h1>
+                <p class="text-sm text-harmony-4 font-light">Fase D - Kelas VII MTs</p>
+            </div>
+            <div class="hidden sm:block text-right">
+                <span class="bg-harmony-5 text-islamic-green text-xs font-bold px-3 py-1 rounded-full shadow-inner">Offline Mode</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-4xl mx-auto w-full p-4 sm:p-6 md:p-8 space-y-12">
+
+        <!-- Section 1: Pengantar Contextual -->
+        <section id="pengantar" class="fade-in bg-white rounded-2xl shadow-md p-6 sm:p-8 border-t-4 border-islamic-green">
+            <h2 class="text-3xl font-bold text-cosmic-cobalt mb-4 border-b-2 border-harmony-4 pb-2">Mari Merenung</h2>
+            <div class="flex flex-col md:flex-row gap-6 items-center">
+                <div class="md:w-2/3">
+                    <p class="text-lg leading-relaxed mb-4">
+                        Bayangkan keseharian kita di Gorontalo. Saat musim tanam tiba, para petani menanam benih jagung dengan penuh harapan. Mereka mencangkul tanah, mengairi lahan, dan merawat tanaman (ini disebut <strong>Ikhtiar</strong>). 
+                    </p>
+                    <p class="text-lg leading-relaxed">
+                        Namun, apakah petani bisa memastikan kapan hujan turun atau jagung pasti berbuah lebat? Tentu tidak. Mereka menyerahkan hasilnya kepada Allah Swt. (ini disebut <strong>Tawakal</strong>). Keyakinan teguh di dalam hati bahwa Allah-lah yang menumbuhkan tanaman itulah yang disebut dengan <strong>Aqidah</strong>.
+                    </p>
+                </div>
+                <div class="md:w-1/3 flex justify-center">
+                    <!-- SVG Illustration instead of image URL for offline support -->
+                    <svg viewBox="0 0 200 200" class="w-40 h-40 drop-shadow-md" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="95" fill="#f7faf4" stroke="#52aa88" stroke-width="4"/>
+                        <path d="M40 160 Q 100 130 160 160 L 160 200 L 40 200 Z" fill="#AF934C"/> <!-- Soil -->
+                        <path d="M100 160 Q 80 100 100 40 Q 120 100 100 160" fill="#52aa88"/> <!-- Plant stalk -->
+                        <path d="M100 120 Q 60 100 70 70 Q 90 90 100 120" fill="#009000"/> <!-- Leaf left -->
+                        <path d="M100 110 Q 140 90 130 60 Q 110 80 100 110" fill="#009000"/> <!-- Leaf right -->
+                        <circle cx="150" cy="50" r="15" fill="#DACBAE"/> <!-- Sun -->
+                    </svg>
+                </div>
+            </div>
+            <div class="mt-6 bg-harmony-4 p-4 rounded-xl border border-harmony-3">
+                <p class="text-center italic font-semibold text-cosmic-cobalt">
+                    "Aqidah adalah fondasi. Tanpa fondasi yang kuat, amal ibadah kita ibarat tanaman tanpa akar yang mudah tumbang tertiup angin."
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 2: Materi Inti -->
+        <section id="materi" class="fade-in">
+            <h2 class="text-3xl font-bold text-islamic-green mb-6 text-center">Eksplorasi Materi</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <button onclick="showTab('pengertian')" class="tab-btn active bg-islamic-green text-white font-semibold py-3 px-4 rounded-xl shadow transition hover:bg-harmony-1">1. Pengertian</button>
+                <button onclick="showTab('dalil')" class="tab-btn bg-white text-islamic-green font-semibold py-3 px-4 rounded-xl shadow transition hover:bg-harmony-4 border border-harmony-3">2. Dalil & Tujuan</button>
+                <button onclick="showTab('trilogi')" class="tab-btn bg-white text-islamic-green font-semibold py-3 px-4 rounded-xl shadow transition hover:bg-harmony-4 border border-harmony-3">3. Iman, Islam, Ihsan</button>
+            </div>
+
+            <!-- Tab Content 1 -->
+            <div id="tab-pengertian" class="tab-content bg-white p-6 sm:p-8 rounded-2xl shadow-md">
+                <h3 class="text-2xl font-bold text-cosmic-cobalt mb-4">Apa itu Aqidah Islam?</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <span class="bg-harmony-2 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 shrink-0">1</span>
+                        <div>
+                            <strong class="text-lg">Secara Bahasa (Etimologi)</strong>
+                            <p class="text-gray-600 mt-1">Berasal dari bahasa Arab <em>'aqada - ya'qidu - 'aqidatan</em> yang berarti ikatan, buhul, atau perjanjian yang kokoh. Sesuatu yang terikat kuat dalam hati.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-harmony-2 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 shrink-0">2</span>
+                        <div>
+                            <strong class="text-lg">Secara Istilah (Terminologi)</strong>
+                            <p class="text-gray-600 mt-1">Keyakinan yang bulat, kokoh, dan mutlak kebenarannya terhadap Allah Swt. dan segala sesuatu yang diajarkan oleh Nabi Muhammad Saw. tanpa ada keraguan sedikit pun.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tab Content 2 -->
+            <div id="tab-dalil" class="tab-content hidden bg-white p-6 sm:p-8 rounded-2xl shadow-md">
+                <h3 class="text-2xl font-bold text-cosmic-cobalt mb-4">Dasar Hukum & Tujuan</h3>
+                
+                <div class="bg-harmony-5 p-4 rounded-lg mb-6 border-l-4 border-islamic-green">
+                    <h4 class="font-bold mb-2">Dasar Hukum Aqidah Islam ada dua:</h4>
+                    <ol class="list-decimal list-inside space-y-2 text-gray-700 ml-2">
+                        <li><strong>Al-Qur'an</strong> (Wahyu/Firman Allah Swt.) - Dasar utama.</li>
+                        <li><strong>Al-Hadis/Sunnah</strong> (Ucapan, perbuatan, ketetapan Nabi Muhammad Saw.) - Penjelas Al-Qur'an.</li>
+                    </ol>
+                </div>
+
+                <h4 class="font-bold text-lg mb-2">Mengapa Kita Harus Mempelajari Aqidah?</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-white border border-harmony-3 p-3 rounded-lg flex items-center shadow-sm">
+                        <span class="text-2xl mr-3">🧭</span>
+                        <p class="text-sm">Mengetahui petunjuk hidup yang benar agar tidak tersesat.</p>
+                    </div>
+                    <div class="bg-white border border-harmony-3 p-3 rounded-lg flex items-center shadow-sm">
+                        <span class="text-2xl mr-3">🛡️</span>
+                        <p class="text-sm">Menyelamatkan diri dari keyakinan syirik (menyekutukan Allah).</p>
+                    </div>
+                    <div class="bg-white border border-harmony-3 p-3 rounded-lg flex items-center shadow-sm">
+                        <span class="text-2xl mr-3">🕊️</span>
+                        <p class="text-sm">Memberikan ketenangan jiwa dan kebahagiaan hidup (dunia-akhirat).</p>
+                    </div>
+                    <div class="bg-white border border-harmony-3 p-3 rounded-lg flex items-center shadow-sm">
+                        <span class="text-2xl mr-3">🏫</span>
+                        <p class="text-sm">Membentuk akhlak mulia dalam kehidupan sekolah (misal: jujur saat ujian karena yakin Allah Maha Melihat).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content 3 -->
+            <div id="tab-trilogi" class="tab-content hidden bg-white p-6 sm:p-8 rounded-2xl shadow-md">
+                <h3 class="text-2xl font-bold text-cosmic-cobalt mb-4">Kesatuan Iman, Islam, dan Ihsan</h3>
+                <p class="mb-4 text-gray-700">Agama Islam memiliki tiga unsur pokok yang tidak bisa dipisahkan, ibarat sebuah bangunan madrasah yang kokoh.</p>
+                
+                <div class="flex flex-col space-y-4">
+                    <div class="p-4 bg-[#e0f2fe] rounded-xl border border-[#bae6fd]">
+                        <h4 class="font-bold text-blue-800 text-lg">1. IMAN (Akar/Pondasi)</h4>
+                        <p class="text-sm mt-1 text-blue-900">Membenarkan dengan hati, mengucapkan dengan lisan, dan mengamalkan dengan perbuatan. (Rukun Iman yang 6).</p>
+                    </div>
+                    <div class="p-4 bg-[#dcfce7] rounded-xl border border-[#bbf7d0]">
+                        <h4 class="font-bold text-green-800 text-lg">2. ISLAM (Batang/Tiang)</h4>
+                        <p class="text-sm mt-1 text-green-900">Tunduk, patuh, dan berserah diri kepada aturan Allah melalui peribadatan fisik. (Rukun Islam yang 5).</p>
+                    </div>
+                    <div class="p-4 bg-[#fef08a] rounded-xl border border-[#fde047]">
+                        <h4 class="font-bold text-yellow-800 text-lg">3. IHSAN (Buah/Atap)</h4>
+                        <p class="text-sm mt-1 text-yellow-900">Beribadah/berbuat baik seolah-olah melihat Allah, atau yakin bahwa Allah senantiasa melihat kita. (Akhlak Mulia).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Interactive Game -->
+        <section id="interaktif" class="fade-in bg-light-khaki bg-opacity-20 p-6 sm:p-8 rounded-2xl border-2 border-matte-goldenrod border-dashed">
+            <h2 class="text-2xl font-bold text-cosmic-cobalt mb-2 text-center">Permainan Konsep: Bangun Madrasah Dirimu</h2>
+            <p class="text-center text-gray-700 mb-6 text-sm">
+                Tarik kotak konsep di bawah (Iman, Islam, Ihsan) dan letakkan pada bagian bangunan yang tepat!
+            </p>
+
+            <div class="flex flex-col md:flex-row gap-8 justify-center items-center">
+                <!-- Draggable Items -->
+                <div class="flex md:flex-col gap-4" id="draggable-container">
+                    <div draggable="true" id="drag-islam" class="draggable bg-[#dcfce7] border-2 border-green-500 p-3 rounded-lg font-bold text-center w-32 shadow">ISLAM<br><span class="text-xs font-normal">(Amal Fisik)</span></div>
+                    <div draggable="true" id="drag-ihsan" class="draggable bg-[#fef08a] border-2 border-yellow-500 p-3 rounded-lg font-bold text-center w-32 shadow">IHSAN<br><span class="text-xs font-normal">(Akhlak/Buah)</span></div>
+                    <div draggable="true" id="drag-iman" class="draggable bg-[#e0f2fe] border-2 border-blue-500 p-3 rounded-lg font-bold text-center w-32 shadow">IMAN<br><span class="text-xs font-normal">(Keyakinan Hati)</span></div>
+                </div>
+
+                <!-- Drop Zones (Building structure) -->
+                <div class="flex flex-col items-center">
+                    <!-- Atap -->
+                    <div class="w-48 h-20 bg-gray-200 border-2 border-gray-400 rounded-t-full flex items-center justify-center dropzone mb-2 relative" data-target="drag-ihsan" id="drop-atap">
+                        <span class="text-gray-500 font-semibold pointer-events-none text-sm z-10">Area Atap/Buah</span>
+                    </div>
+                    <!-- Tiang -->
+                    <div class="w-40 h-24 bg-gray-200 border-2 border-gray-400 flex items-center justify-center dropzone mb-2 relative" data-target="drag-islam" id="drop-tiang">
+                        <span class="text-gray-500 font-semibold pointer-events-none text-sm z-10">Area Tiang/Batang</span>
+                    </div>
+                    <!-- Pondasi -->
+                    <div class="w-56 h-16 bg-gray-200 border-2 border-gray-400 rounded-b-lg flex items-center justify-center dropzone relative" data-target="drag-iman" id="drop-pondasi">
+                        <span class="text-gray-500 font-semibold pointer-events-none text-sm z-10">Area Pondasi/Akar</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="game-feedback" class="mt-6 text-center font-bold text-lg h-8 hidden">
+                <!-- Feedback text will appear here -->
+            </div>
+            <div class="text-center mt-4">
+                <button id="btn-reset-game" class="hidden bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 text-sm font-semibold transition">Ulangi Permainan</button>
+            </div>
+        </section>
+
+        <!-- Section 4: Kuis Formatif Evaluasi -->
+        <section id="evaluasi" class="fade-in bg-white rounded-2xl shadow-lg p-6 sm:p-8 border-t-4 border-cosmic-cobalt">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-cosmic-cobalt">Kuis Evaluasi Formatif</h2>
+                <p class="text-gray-600 mt-2">Uji pemahamanmu tentang Aqidah Islam. Jawablah dengan jujur!</p>
+            </div>
+
+            <!-- Form Data Diri Sebelum Kuis -->
+            <div id="quiz-start-screen" class="max-w-md mx-auto bg-harmony-5 p-6 rounded-xl border border-harmony-3 mb-6 shadow-sm">
+                <h3 class="text-xl font-bold text-cosmic-cobalt mb-4 text-center">Data Diri Peserta</h3>
+                <div class="mb-4">
+                    <label for="student-name" class="block text-sm font-semibold text-gray-700 mb-1">Nama Lengkap</label>
+                    <input type="text" id="student-name" placeholder="Masukkan nama kamu..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-islamic-green focus:border-transparent transition">
+                </div>
+                <div class="mb-6">
+                    <label for="student-class" class="block text-sm font-semibold text-gray-700 mb-1">Kelas</label>
+                    <select id="student-class" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-islamic-green focus:border-transparent transition bg-white">
+                        <option value="VII-A">VII-A</option>
+                        <option value="VII-B">VII-B</option>
+                        <option value="VII-C">VII-C</option>
+                        <option value="VII-D">VII-D</option>
+                        <option value="VII-E">VII-E</option>
+                    </select>
+                </div>
+                <p id="start-error-msg" class="text-red-500 text-sm hidden mb-4 text-center font-semibold bg-red-100 p-2 rounded animate-pulse">Mohon isi nama lengkapmu terlebih dahulu!</p>
+                <button id="btn-start-quiz" class="w-full bg-islamic-green hover:bg-green-700 text-white font-bold py-3 px-4 rounded-xl transition shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                    Mulai Kuis <span>🚀</span>
+                </button>
+            </div>
+
+            <div id="quiz-container" class="max-w-2xl mx-auto relative hidden">
+                <!-- Progress bar -->
+                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-6">
+                    <div id="quiz-progress" class="bg-islamic-green h-2.5 rounded-full" style="width: 20%"></div>
+                </div>
+                <div class="text-right text-sm text-gray-500 mb-2 font-semibold font-mono" id="question-counter">Soal 1 / 5</div>
+
+                <!-- Questions will be injected here via JS -->
+                <div id="question-box" class="bg-harmony-5 p-6 rounded-xl border border-harmony-3 mb-6 min-h-[250px]">
+                    <h3 id="question-text" class="text-xl font-semibold mb-6 text-gray-800 leading-snug"></h3>
+                    <div id="options-container" class="flex flex-col space-y-3">
+                        <!-- Options generated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Feedback area after answering -->
+                <div id="quiz-feedback" class="hidden p-4 rounded-lg mb-6 text-sm md:text-base border-l-4">
+                    <div class="flex items-start">
+                        <span id="feedback-icon" class="text-2xl mr-3 mt-1"></span>
+                        <div>
+                            <strong id="feedback-title" class="block text-lg mb-1"></strong>
+                            <p id="feedback-explanation" class="text-gray-700"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <button id="btn-next" class="hidden bg-islamic-green hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg transition ml-auto">Lanjut Soal >></button>
+                </div>
+            </div>
+
+            <!-- Quiz Results (Hidden initially) -->
+            <div id="quiz-result" class="hidden text-center py-8">
+                <h3 class="text-3xl font-bold text-cosmic-cobalt mb-2">Alhamdulillah!</h3>
+                <p class="text-xl text-gray-600 mb-6">Kamu telah menyelesaikan latihan evaluasi.</p>
+                
+                <!-- Indikator Loading Simpan Data -->
+                <div id="saving-indicator" class="mb-6 p-3 bg-harmony-4 border border-harmony-3 rounded-lg text-cosmic-cobalt font-semibold animate-pulse hidden">
+                    Sedang merekap nilaimu dan menyimpan ke server guru... ⏳
+                </div>
+                <div id="save-success" class="mb-6 p-3 bg-green-50 border border-green-200 rounded-lg text-islamic-green font-semibold hidden shadow-sm">
+                    ✅ Alhamdulillah, Nilaimu berhasil terkirim ke database guru!
+                </div>
+                <div id="save-error" class="mb-6 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 font-semibold hidden shadow-sm">
+                    ❌ Gagal mengirim nilai. Pastikan internetmu aktif. (Nilai tetap muncul di bawah)
+                </div>
+
+                <!-- Student Data Display -->
+                <div class="bg-harmony-5 p-4 rounded-xl inline-block border border-harmony-3 mb-6 shadow-sm w-full max-w-sm">
+                    <p class="text-gray-500 text-xs font-bold uppercase tracking-wider mb-1">Hasil Kuis Milik:</p>
+                    <p id="result-student-name" class="text-2xl font-bold text-cosmic-cobalt mb-1 break-words">Nama Siswa</p>
+                    <p id="result-student-class" class="text-sm text-islamic-green font-semibold bg-white inline-block px-3 py-1 rounded-full border border-harmony-4 shadow-sm mt-1">Kelas VII</p>
+                </div>
+                <br>
+
+                <div class="inline-block bg-harmony-4 p-8 rounded-full border-4 border-islamic-green mb-6 shadow-inner">
+                    <span id="final-score" class="text-5xl font-black text-islamic-green">0</span>
+                    <span class="text-2xl text-gray-600 font-bold">/100</span>
+                </div>
+                <p id="score-message" class="text-lg font-semibold text-gray-800 mb-8 px-4"></p>
+                <button onclick="resetQuiz()" class="bg-cosmic-cobalt hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition">Coba Lagi</button>
+            </div>
+        </section>
+
+        <!-- Section 5: Profil Pengembang -->
+        <section id="profil-pengembang" class="fade-in bg-white rounded-2xl shadow-md p-6 sm:p-8 border-t-4 border-matte-goldenrod">
+            <h2 class="text-2xl font-bold text-cosmic-cobalt mb-6 text-center border-b-2 border-harmony-4 pb-2">Profil Pengembang Modul</h2>
+            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 bg-harmony-5 p-6 rounded-xl border border-harmony-3">
+                <div class="w-24 h-24 bg-gradient-to-br from-islamic-green to-harmony-1 rounded-full flex items-center justify-center text-white text-4xl shadow-lg shrink-0 border-4 border-white">
+                    👨‍🏫
+                </div>
+                <div class="flex-1 w-full">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
+                        <div class="border-b border-gray-200 pb-2 sm:border-0 sm:pb-0">
+                            <p class="text-xs text-islamic-green font-bold uppercase tracking-wider mb-1">Nama Pengembang</p>
+                            <p class="text-lg font-bold text-gray-800">[Masukkan Nama Anda, S.Pd.I]</p>
+                        </div>
+                        <div class="border-b border-gray-200 pb-2 sm:border-0 sm:pb-0">
+                            <p class="text-xs text-islamic-green font-bold uppercase tracking-wider mb-1">Pengajar / Guru Mapel</p>
+                            <p class="text-lg font-bold text-gray-800">Aqidah Akhlak</p>
+                        </div>
+                        <div class="border-b border-gray-200 pb-2 sm:border-0 sm:pb-0">
+                            <p class="text-xs text-islamic-green font-bold uppercase tracking-wider mb-1">Kelas / Fase</p>
+                            <p class="text-lg font-bold text-gray-800">VII (Tujuh) MTs / Fase D</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-islamic-green font-bold uppercase tracking-wider mb-1">Tahun Pelajaran</p>
+                            <p class="text-lg font-bold text-gray-800">2026/2027</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-cosmic-cobalt text-white py-6 mt-12 text-center">
+        <div class="max-w-4xl mx-auto px-4 text-sm font-light">
+            <p>&copy; 2026 Modul Interaktif Aqidah Akhlak - MTs Kelas VII Fase D.</p>
+            <p class="mt-1 text-gray-400">Dirancang khusus untuk pembelajaran bermakna (Deep Learning) di lingkungan madrasah.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. Tab Navigation Logic ---
+        function showTab(tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            // Show selected content
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            
+            // Reset button styles
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = 'tab-btn bg-white text-islamic-green font-semibold py-3 px-4 rounded-xl shadow transition hover:bg-harmony-4 border border-harmony-3';
+            });
+            
+            // Style active button
+            const activeBtn = event.currentTarget || document.querySelector(`button[onclick="showTab('${tabId}')"]`);
+            activeBtn.className = 'tab-btn active bg-islamic-green text-white font-semibold py-3 px-4 rounded-xl shadow transition hover:bg-harmony-1';
+        }
+
+        // --- 2. Drag and Drop Game Logic ---
+        const draggables = document.querySelectorAll('.draggable');
+        const dropzones = document.querySelectorAll('.dropzone');
+        const gameFeedback = document.getElementById('game-feedback');
+        const btnResetGame = document.getElementById('btn-reset-game');
+        let correctDrops = 0;
+
+        // Store original parent to reset game
+        const originalContainer = document.getElementById('draggable-container');
+
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', () => {
+                draggable.classList.add('dragging');
+                // Use setTimeout to allow drag image to render before hiding actual element
+                setTimeout(() => draggable.style.opacity = '0.5', 0);
+            });
+
+            draggable.addEventListener('dragend', () => {
+                draggable.classList.remove('dragging');
+                draggable.style.opacity = '1';
+                checkGameWin();
+            });
+        });
+
+        dropzones.forEach(zone => {
+            zone.addEventListener('dragover', e => {
+                e.preventDefault(); // Necessary to allow dropping
+                zone.classList.add('hover');
+            });
+
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('hover');
+            });
+
+            zone.addEventListener('drop', e => {
+                e.preventDefault();
+                zone.classList.remove('hover');
+                const draggable = document.querySelector('.dragging');
+                
+                if (!draggable) return;
+
+                const targetId = zone.getAttribute('data-target');
+                const draggedId = draggable.id;
+
+                if (targetId === draggedId) {
+                    // Correct drop
+                    zone.appendChild(draggable);
+                    draggable.style.position = 'relative';
+                    draggable.style.margin = '0 auto';
+                    draggable.setAttribute('draggable', 'false'); // Lock it
+                    draggable.style.cursor = 'default';
+                    // Hide placeholder text
+                    const spanText = zone.querySelector('span');
+                    if(spanText) spanText.style.display = 'none';
+                    
+                    correctDrops++;
+                    showGameFeedback('Tepat sekali!', 'text-green-600');
+                } else {
+                    // Wrong drop
+                    showGameFeedback('Bukan disitu letaknya, coba perhatikan analoginya!', 'text-red-500');
+                }
+            });
+        });
+
+        function showGameFeedback(msg, colorClass) {
+            gameFeedback.textContent = msg;
+            gameFeedback.className = `mt-6 text-center font-bold text-lg h-8 block ${colorClass} fade-in`;
+            setTimeout(() => {
+                if(correctDrops < 3) {
+                    gameFeedback.classList.add('hidden');
+                }
+            }, 2500);
+        }
+
+        function checkGameWin() {
+            if (correctDrops === 3) {
+                gameFeedback.innerHTML = '✨ Masya Allah! Bangunan Madrasahmu sudah sempurna. Iman, Islam, dan Ihsan adalah satu kesatuan. ✨';
+                gameFeedback.className = 'mt-6 text-center font-bold text-lg block text-cosmic-cobalt bg-harmony-4 p-2 rounded';
+                btnResetGame.classList.remove('hidden');
+            }
+        }
+
+        btnResetGame.addEventListener('click', () => {
+            // Reset game
+            draggables.forEach(draggable => {
+                originalContainer.appendChild(draggable);
+                draggable.setAttribute('draggable', 'true');
+                draggable.style.cursor = 'grab';
+            });
+            dropzones.forEach(zone => {
+                const spanText = zone.querySelector('span');
+                if(spanText) spanText.style.display = 'block';
+            });
+            correctDrops = 0;
+            gameFeedback.classList.add('hidden');
+            btnResetGame.classList.add('hidden');
+        });
+
+        // --- 3. Formative Quiz Logic ---
+        const quizData = [
+            {
+                question: "Andi menemukan uang Rp 50.000 di halaman madrasah saat sepi. Ia teringat bahwa Allah Maha Melihat, lalu menyerahkan uang itu ke ruang guru. Sikap Andi menunjukkan bahwa Aqidah berfungsi untuk...",
+                options: [
+                    "A. Mendapatkan hadiah dari guru",
+                    "B. Membentuk akhlak mulia dan mencegah perbuatan buruk",
+                    "C. Menghindari hukuman disiplin sekolah",
+                    "D. Menunjukkan bahwa ia adalah siswa terpandai"
+                ],
+                correct: 1, // Index of correct option (B)
+                explanation: "Jawaban Tepat (B). Aqidah (keyakinan) bahwa Allah Maha Melihat (Al-Bashir) mendorong seseorang berbuat baik dan menjauhi maksiat, meskipun tidak ada manusia yang melihat. Itulah fungsi Aqidah sebagai pembentuk karakter."
+            },
+            {
+                question: "Dalam Islam, keyakinan hati, ucapan lisan, dan perbuatan saling berkaitan. Mana dari pernyataan berikut yang merupakan analogi paling tepat untuk 'Ihsan'?",
+                options: [
+                    "A. Pondasi rumah yang tertanam dalam tanah",
+                    "B. Tiang penyangga bangunan agar tidak roboh",
+                    "C. Atap pelindung atau buah dari pohon yang rindang",
+                    "D. Pagar yang mengelilingi rumah"
+                ],
+                correct: 2, // C
+                explanation: "Jawaban Tepat (C). Iman adalah pondasi (akar), Islam adalah tiang (batang), dan Ihsan adalah wujud kesempurnaan atau buah/atap dari keimanan dan keislaman seseorang berupa akhlak yang sangat mulia."
+            },
+            {
+                question: "Sumber utama untuk mengambil dasar hukum tentang Aqidah Islam adalah...",
+                options: [
+                    "A. Al-Qur'an dan Akal pikiran manusia",
+                    "B. Adat istiadat daerah setempat dan Hadis",
+                    "C. Al-Qur'an dan Al-Hadis (Sunnah Nabi)",
+                    "D. Buku-buku sejarah kebudayaan"
+                ],
+                correct: 2, // C
+                explanation: "Jawaban Tepat (C). Dasar akidah Islam bersifat <em>Taufiqiyah</em> (hanya bersumber dari wahyu), yaitu Al-Qur'an sebagai pedoman utama dan Al-Hadis sebagai penjelasannya. Akal hanya berfungsi untuk memahami wahyu, bukan sebagai penentu utama."
+            },
+            {
+                question: "Kata 'Aqidah' secara etimologi (bahasa) berarti...",
+                options: [
+                    "A. Tunduk dan patuh secara fisik",
+                    "B. Ikatan, buhul, atau perjanjian yang kokoh",
+                    "C. Beribadah seolah melihat Tuhan",
+                    "D. Membaca kitab suci dengan tartil"
+                ],
+                correct: 1, // B
+                explanation: "Jawaban Tepat (B). Berasal dari bahasa Arab <em>'aqada</em> yang bermakna ikatan. Artinya, keyakinan hati seorang Muslim harus terikat dengan kuat tanpa ada keraguan sedikit pun."
+            },
+            {
+                question: "Pak Ridwan adalah petani jagung di Gorontalo. Setelah mencangkul, memupuk, dan menanam benih (Ikhtiar), ia berdoa dan menyerahkan urusan panennya sepenuhnya kepada Allah. Sikap batin Pak Ridwan ini disebut...",
+                options: [
+                    "A. Qana'ah",
+                    "B. Ta'awun",
+                    "C. Tawadhu'",
+                    "D. Tawakal"
+                ],
+                correct: 3, // D
+                explanation: "Jawaban Tepat (D). Tawakal artinya berserah diri kepada Allah Swt. <strong>setelah</strong> melakukan usaha (ikhtiar) secara maksimal. Ini adalah bentuk implementasi keyakinan/aqidah yang benar."
+            },
+            {
+                question: "Fatimah sedang mengikuti ujian akhir semester. Pengawas sedang keluar kelas dan teman-temannya mulai menyontek. Fatimah memilih tetap mengerjakan sendiri karena ia yakin ada Malaikat Raqib dan Atid yang selalu mencatat amalnya. Sikap Fatimah mencerminkan pengamalan dari...",
+                options: [
+                    "A. Iman kepada Hari Kiamat",
+                    "B. Iman kepada Malaikat Allah",
+                    "C. Iman kepada Kitab-kitab Allah",
+                    "D. Iman kepada Qada dan Qadar"
+                ],
+                correct: 1, // B
+                explanation: "Jawaban Tepat (B). Keyakinan (Aqidah) terhadap adanya malaikat pencatat amal (Raqib dan Atid) akan mencegah seseorang berbuat curang meskipun tidak ada manusia yang mengawasi secara langsung."
+            },
+            {
+                question: "Ketika musim kemarau panjang melanda, para petani jagung mengalami gagal panen. Pak Budi sebagai seorang muslim yang memiliki aqidah kuat akan bersikap...",
+                options: [
+                    "A. Mengeluh setiap hari dan menyalahkan cuaca",
+                    "B. Pergi ke orang pintar (dukun) untuk meminta hujan turun",
+                    "C. Bersabar, beristighfar, dan meyakini bahwa ini adalah ketetapan Allah",
+                    "D. Meninggalkan profesi petani dan marah kepada keadaan"
+                ],
+                correct: 2, // C
+                explanation: "Jawaban Tepat (C). Orang yang memiliki aqidah kokoh akan menerima takdir (Qada dan Qadar) Allah dengan sabar, serta meyakini ada hikmah di balik musibah tanpa menyekutukan-Nya."
+            },
+            {
+                question: "Salah satu sifat wajib bagi Allah adalah 'Wahdaniyat' yang berarti Maha Esa. Perilaku di madrasah yang bertentangan dengan sifat ini (mengarah pada syirik) adalah...",
+                options: [
+                    "A. Membawa pensil 'jimat' pemberian peramal agar lulus ujian",
+                    "B. Belajar kelompok bersama teman-teman sebelum ulangan",
+                    "C. Meminta bantuan guru ketika kesulitan memahami pelajaran",
+                    "D. Berdoa kepada Allah setelah selesai shalat Dhuha di sekolah"
+                ],
+                correct: 0, // A
+                explanation: "Jawaban Tepat (A). Mempercayai benda (seperti pensil jimat) memiliki kekuatan ajaib untuk meluluskan ujian adalah bentuk syirik (menyekutukan Allah), yang sangat bertentangan dengan sifat Wahdaniyat."
+            },
+            {
+                question: "Dalam mempelajari Aqidah Islam, kita mengenal sifat-sifat Allah. Keyakinan bahwa seluruh alam semesta akan hancur pada saat kiamat membuktikan bahwa makhluk bersifat 'Fana', sedangkan Allah bersifat...",
+                options: [
+                    "A. Qidam (Terdahulu)",
+                    "B. Baqa (Kekal)",
+                    "C. Mukhalafatu lil Hawaditsi (Berbeda dengan makhluk)",
+                    "D. Qudrat (Maha Kuasa)"
+                ],
+                correct: 1, // B
+                explanation: "Jawaban Tepat (B). Fana artinya rusak atau binasa, yang merupakan sifat makhluk. Kebalikannya adalah sifat wajib Allah yaitu Baqa, yang artinya Maha Kekal atau tidak akan pernah binasa."
+            },
+            {
+                question: "Budi berjanji kepada temannya untuk mengembalikan buku pinjaman pada hari Senin. Budi berusaha menepati janjinya karena ia yakin bahwa akhlak mulia bersumber dari keimanan yang benar. Pernyataan ini menunjukkan bahwa...",
+                options: [
+                    "A. Aqidah tidak ada hubungannya dengan perilaku sehari-hari",
+                    "B. Aqidah adalah fondasi yang melahirkan akhlak yang baik",
+                    "C. Akhlak lebih penting daripada Aqidah",
+                    "D. Membaca buku adalah sebagian dari iman"
+                ],
+                correct: 1, // B
+                explanation: "Jawaban Tepat (B). Ibarat pohon, Aqidah adalah akar yang kuat. Akar yang kuat tersebut akan menumbuhkan batang (ibadah) dan menghasilkan buah yang manis, yaitu akhlakul karimah (perilaku mulia seperti menepati janji)."
+            },
+            {
+                question: "Agama Islam mengatur kehidupan manusia dalam segala aspek. Ketika seorang siswa MTs mengucapkan dua kalimat syahadat, mendirikan shalat, dan berpuasa Ramadhan, berarti ia sedang menjalankan pilar...",
+                options: [
+                    "A. Iman",
+                    "B. Ihsan",
+                    "C. Islam",
+                    "D. Taqwa"
+                ],
+                correct: 2, // C
+                explanation: "Jawaban Tepat (C). Syahadat, shalat, puasa, zakat, dan haji adalah amal-amal fisik dan peribadatan nyata yang tergabung dalam Rukun Islam."
+            },
+            {
+                question: "Hasan sangat pandai melantunkan azan. Suatu hari ia diminta azan di masjid sekolah. Hasan membaguskan suaranya bukan untuk dipuji teman-temannya, melainkan murni karena Allah. Tingkatan ibadah Hasan ini disebut...",
+                options: [
+                    "A. Riya'",
+                    "B. Ihsan",
+                    "C. Nifaq",
+                    "D. Takabbur"
+                ],
+                correct: 1, // B
+                explanation: "Jawaban Tepat (B). Ihsan adalah beribadah seolah-olah kita melihat Allah, atau meyakini Allah melihat kita. Sehingga, ibadah dilakukan dengan tulus ikhlas tanpa riya' (ingin dipuji manusia)."
+            },
+            {
+                question: "Aqidah Islam membentengi seorang remaja dari pergaulan bebas dan pengaruh negatif lingkungan. Hal ini membuktikan bahwa salah satu tujuan mempelajari Aqidah adalah...",
+                options: [
+                    "A. Agar mendapat nilai bagus di raport",
+                    "B. Supaya dipuji sebagai anak alim oleh guru",
+                    "C. Menyelamatkan diri dari kesesatan dan membimbing ke jalan yang benar",
+                    "D. Untuk mengetahui kelemahan agama lain"
+                ],
+                correct: 2, // C
+                explanation: "Jawaban Tepat (C). Tujuan utama Aqidah adalah menjadi kompas/petunjuk hidup. Dengan aqidah yang benar, seseorang akan tahu batasan halal/haram sehingga terhindar dari perbuatan maksiat dan kesesatan."
+            },
+            {
+                question: "Al-Qur'an diturunkan kepada Nabi Muhammad Saw. sebagai sumber hukum pertama dalam Aqidah Islam. Sikap seorang pelajar MTs yang mencerminkan iman kepada Al-Qur'an adalah...",
+                options: [
+                    "A. Menjadikan Al-Qur'an sebagai pajangan di rumah agar berkah",
+                    "B. Membaca, memahami, dan menjadikan Al-Qur'an sebagai pedoman akhlak di madrasah",
+                    "C. Membawa Al-Qur'an ke mana saja untuk menolak bala",
+                    "D. Hanya membaca Al-Qur'an saat bulan Ramadhan saja"
+                ],
+                correct: 1, // B
+                explanation: "Jawaban Tepat (B). Beriman kepada kitab Allah berarti kita harus mempelajari isinya (membaca dan memahami artinya) serta menjadikannya panduan akhlak dalam kehidupan nyata sehari-hari."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let hasAnswered = false;
+        let currentStudentName = "";
+        let currentStudentClass = "";
+
+        // --- VARIABEL DATABASE (APPS SCRIPT) ---
+        // PENTING: Ganti tulisan di bawah ini dengan URL Web App Apps Script Anda!
+        const scriptURL = 'ISI_DENGAN_URL_WEB_APP_GAS_ANDA_DISINI'; 
+        let startTime = null;
+        let endTime = null;
+        let studentAnswers = []; // Menyimpan rekam jejak jawaban siswa
+
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const quizFeedback = document.getElementById('quiz-feedback');
+        const feedbackIcon = document.getElementById('feedback-icon');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackExplanation = document.getElementById('feedback-explanation');
+        const btnNext = document.getElementById('btn-next');
+        const quizProgress = document.getElementById('quiz-progress');
+        const questionCounter = document.getElementById('question-counter');
+
+        const btnStartQuiz = document.getElementById('btn-start-quiz');
+        const inputName = document.getElementById('student-name');
+        const selectClass = document.getElementById('student-class');
+        const errorMsg = document.getElementById('start-error-msg');
+        const screenStart = document.getElementById('quiz-start-screen');
+        const screenQuiz = document.getElementById('quiz-container');
+
+        btnStartQuiz.addEventListener('click', () => {
+            const name = inputName.value.trim();
+            if (!name) {
+                // Tampilkan pesan error jika nama kosong
+                errorMsg.classList.remove('hidden');
+                inputName.classList.add('border-red-500', 'ring-2', 'ring-red-500');
+                return;
+            }
+            
+            // Sembunyikan pesan error
+            errorMsg.classList.add('hidden');
+            inputName.classList.remove('border-red-500', 'ring-2', 'ring-red-500');
+            
+            // Simpan data siswa
+            currentStudentName = name;
+            currentStudentClass = selectClass.value;
+            
+            // Transisi layar
+            screenStart.classList.add('hidden');
+            screenQuiz.classList.remove('hidden');
+            screenQuiz.classList.add('fade-in');
+            
+            // Catat waktu mulai pengerjaan dan reset history jawaban
+            startTime = new Date();
+            studentAnswers = [];
+
+            loadQuestion();
+        });
+
+        function loadQuestion() {
+            hasAnswered = false;
+            quizFeedback.classList.add('hidden');
+            btnNext.classList.add('hidden');
+            
+            const q = quizData[currentQuestion];
+            questionText.textContent = q.question;
+            questionCounter.textContent = `Soal ${currentQuestion + 1} / ${quizData.length}`;
+            quizProgress.style.width = `${((currentQuestion) / quizData.length) * 100}%`;
+
+            optionsContainer.innerHTML = '';
+            q.options.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option bg-white border-2 border-gray-200 text-left px-5 py-4 rounded-xl font-medium text-gray-700 hover:border-islamic-green hover:bg-harmony-5 w-full';
+                btn.textContent = opt;
+                btn.onclick = () => selectOption(index, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectOption(selectedIndex, selectedBtn) {
+            if (hasAnswered) return;
+            hasAnswered = true;
+
+            const q = quizData[currentQuestion];
+            const isCorrect = selectedIndex === q.correct;
+
+            // REKAM JAWABAN SISWA
+            // Ini akan tersusun rapi sesuai urutan indeks pertanyaan
+            studentAnswers[currentQuestion] = {
+                questionText: q.question,
+                selectedAnswer: q.options[selectedIndex],
+                isCorrect: isCorrect
+            };
+
+            // Highlight answers
+            const allBtns = optionsContainer.querySelectorAll('button');
+            allBtns.forEach((btn, idx) => {
+                btn.disabled = true;
+                btn.classList.remove('hover:border-islamic-green', 'hover:bg-harmony-5', 'quiz-option');
+                if (idx === q.correct) {
+                    btn.classList.add('correct-answer'); // Highlight correct answer green
+                } else if (idx === selectedIndex && !isCorrect) {
+                    btn.classList.add('wrong-answer'); // Highlight selected wrong answer red
+                } else {
+                    btn.style.opacity = '0.5';
+                }
+            });
+
+            // Show Feedback
+            quizFeedback.classList.remove('hidden');
+            if (isCorrect) {
+                score++; // Increment count of correct answers instead of flat +20 points
+                quizFeedback.className = 'p-4 rounded-lg mb-6 border-l-4 border-islamic-green bg-harmony-4 fade-in block';
+                feedbackIcon.textContent = '✅';
+                feedbackTitle.textContent = 'Tepat Sekali!';
+                feedbackTitle.className = 'block text-lg mb-1 text-islamic-green font-bold';
+            } else {
+                quizFeedback.className = 'p-4 rounded-lg mb-6 border-l-4 border-red-500 bg-red-50 fade-in block';
+                feedbackIcon.textContent = '❌';
+                feedbackTitle.textContent = 'Kurang Tepat';
+                feedbackTitle.className = 'block text-lg mb-1 text-red-600 font-bold';
+            }
+            feedbackExplanation.innerHTML = q.explanation;
+
+            // Show next button or finish
+            btnNext.classList.remove('hidden');
+            if (currentQuestion === quizData.length - 1) {
+                btnNext.textContent = 'Lihat Hasil Akhir';
+                quizProgress.style.width = '100%';
+            }
+        }
+
+        btnNext.addEventListener('click', () => {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        });
+
+        function showResults() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            const resultDiv = document.getElementById('quiz-result');
+            resultDiv.classList.remove('hidden');
+            resultDiv.classList.add('fade-in');
+            
+            // Catat waktu selesai
+            endTime = new Date();
+            
+            document.getElementById('result-student-name').textContent = currentStudentName;
+            document.getElementById('result-student-class').textContent = "Kelas " + currentStudentClass;
+            
+            // Calculate percentage score dynamically
+            const finalScorePercentage = Math.round((score / quizData.length) * 100);
+            
+            document.getElementById('final-score').textContent = finalScorePercentage;
+            
+            const msgEl = document.getElementById('score-message');
+            if (finalScorePercentage === 100) {
+                msgEl.textContent = 'Mumtaz! (Sempurna). Pemahaman Aqidahmu sangat kuat. Pertahankan dan amalkan di madrasah ya!';
+                msgEl.className = 'text-lg font-semibold text-islamic-green mb-8 px-4';
+            } else if (finalScorePercentage >= 60) {
+                msgEl.textContent = 'Jayyid (Baik). Kamu sudah memahami dasar-dasarnya, tapi yuk baca ulang bagian yang masih keliru.';
+                msgEl.className = 'text-lg font-semibold text-cosmic-cobalt mb-8 px-4';
+            } else {
+                msgEl.textContent = 'Jangan menyerah! Pelajari lagi materi di atas pelan-pelan, kamu pasti bisa memahaminya lebih baik.';
+                msgEl.className = 'text-lg font-semibold text-red-600 mb-8 px-4';
+            }
+
+            // PROSES SIMPAN KE GOOGLE SHEETS
+            saveToDatabase(finalScorePercentage);
+        }
+
+        // FUNGSI FETCH KE GOOGLE APPS SCRIPT
+        function saveToDatabase(finalScorePercentage) {
+            // Jika URL belum diganti, batalkan pengiriman
+            if (scriptURL === 'ISI_DENGAN_URL_WEB_APP_GAS_ANDA_DISINI' || scriptURL.trim() === '') {
+                console.log("URL GAS belum diisi. Menyimpan ke database dilewati.");
+                return;
+            }
+
+            // Tampilkan animasi loading
+            document.getElementById('saving-indicator').classList.remove('hidden');
+            document.getElementById('save-success').classList.add('hidden');
+            document.getElementById('save-error').classList.add('hidden');
+
+            // Susun bungkusan data (Payload)
+            const payload = {
+                studentName: currentStudentName,
+                studentClass: currentStudentClass,
+                startTime: startTime.toISOString(),
+                endTime: endTime.toISOString(),
+                correctCount: score,
+                wrongCount: quizData.length - score,
+                totalQuestions: quizData.length,
+                scorePercentage: finalScorePercentage,
+                answers: studentAnswers,
+                quizData: quizData // Dikirim 1x agar backend bisa buat Sheet Soal otomatis
+            };
+
+            // Kirim data secara diam-diam (Asynchronous)
+            fetch(scriptURL, {
+                method: 'POST',
+                // Catatan: sengaja tidak pakai header "Content-Type: application/json" 
+                // agar tidak dicegat oleh CORS preflight browser di GitHub Pages.
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Sukses terkirim
+                document.getElementById('saving-indicator').classList.add('hidden');
+                document.getElementById('save-success').classList.remove('hidden');
+            })
+            .catch(error => {
+                // Gagal terkirim (misal karena jaringan siswa terputus)
+                console.error('Error:', error);
+                document.getElementById('saving-indicator').classList.add('hidden');
+                document.getElementById('save-error').classList.remove('hidden');
+            });
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            loadQuestion();
+        }
+
+        // Initialize basic settings on load
+        window.onload = () => {
+            inputName.value = ''; // Bersihkan input nama saat halaman direfresh
+        };
+    </script>
+</body>
+</html>
